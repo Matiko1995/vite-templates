@@ -14,6 +14,7 @@
                     />test
                     <div v-show="userMenuShow" class="user-menu">
                         <div class="user-menu-item" @click="logout">登出</div>
+                        <div class="user-menu-item" @click="getList">123</div>
                     </div>
                 </div></el-header
             >
@@ -26,6 +27,7 @@
     import { useRouter } from 'vue-router';
     import Sidebar from '@/layout/Sidebar.vue';
 
+    import { getListAPI } from '@/api/goods';
     export default defineComponent({
         name: 'Index',
         components: {
@@ -40,9 +42,15 @@
                     router.push({
                         path: '/login'
                     });
+                },
+                async getList() {
+                    const params = {
+                        tc_gen01: '10220506'
+                    };
+                    const res = await getListAPI(params);
+                    console.log('res', res);
                 }
             };
-
             return {
                 userMenuShow,
                 ...methods
